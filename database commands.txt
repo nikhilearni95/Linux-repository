@@ -1,0 +1,339 @@
+Database queries
+
+mysql -u username -ppassword -h ipaddress databasename
+
+mysql -unikhil.earni -pAsdf@1234 -h 10.0.68.203 -D psms
+
+DATABASE COMMANDS
+
+use databasename; (or) use databasename ------ ENTER INTO A DATABASE
+
+show databases;
+
+show tables;
+
+LOGIN TO MYSQL
+
+1.mysql -u username -ppassword
+
+2.mysql -u username -p databasename
+
+prompts for password
+
+enter the password
+
+TO ADD A DUMP DATABASE
+
+first we need to check whether the database to which u want to add dump exists or not,, if not create database first
+
+use CMD
+
+login to mysql with cmdline mysql -u username -p 
+
+enter password
+
+use below cmdline to create database
+
+create database databasename;
+
+exit/ctrl+d
+
+now add dump to the created database using below cmdline
+
+mysql -u username -ppassword databasename < databasename.sql(this is database dump file)
+
+enter passsword
+
+done 
+
+*****************************
+username-nikhil.earni
+password-Asdf@1234-encryption(573ec25450f4badb4686a773aa4001eb)
+
+**************************
+
+CREATE A DATABASE
+
+CREATE DATABASE databasename;
+
+**********************
+
+INSERT INTO pet VALUES ('Puffball','Diane','hamster','f','1999-03-30',NULL);
+
+INSERT INTO table_name (column1, column2, column3, ...) VALUES ('value1', 'value2', 'value3', ...);
+
+*****************************
+
+UPDATE pet SET columnname = '1989-08-31' WHERE columnname = 'Bowser';
+
+***********************
+select * from tablename;
+*************************
+describe tablename;           -----------    To get different columns in the tablename
+*************************
+commands with extension \G    -----------    Gives data in organised way
+************************
+UPDATE tablename SET columnname = 'string'
+
+***************************
+
+show create table international_number_pattern_info \G
+
+***************************
+see the required details in the table
+show create table contractmst;
+**********************************************************
+
+select * from usermst where userid= 'nikhil' \G
+
+***********************************************************
+
+issue with logging in even filled username and passwords
+
+otp updated on= now()
+last updated on= now()
+
+***********************************************************
+
+encrypt with md5sum
+
+echo -n 'password' | md5sum   ------------    Linux command
+select md5('password')        ------------    MYSQL command
+
+**********************************************************
+
+issue with login otp not comming to mail
+
+api15 properties file updated with mail-ID and Password
+
+issue resolved...
+
+*************************************************************
+Grant permissions to the users
+
+https://www.digitalocean.com/community/tutorials/how-to-create-a-new-user-and-grant-permissions-in-mysql
+
+***********************************************************
+
+RUNNING A QUERY FROM BASH COMMANDLINE
+
+mysql -unikhil.earni -pAsdf@1234 -h 10.0.68.203 nikhil -D "ALTER TABLE TABLENAME ADD COLUMN COLUMNNAME varchar(255)";--->POINTS TO REMEMBER (NAMES MUST NOT BE BETWEEN '')
+
+*******************************Information*********
+
+Syntax :
+-----
+# mysql -u [username] -p [password] -e '[mysql commands]'
+-----
+here,
+-u : prompt for MySQL database username
+-p : prompt for Password
+-e : prompt for Query you want to execute
+
+Examples :
+-----
+# mysql -u hoststud -p ****** -e 'select * from table' database name
+-----
+
+To check all available databases:
+-----
+# mysql -u hoststud -p ****** -e 'show databases'
+-----
+
+Execute MySQL query on command line remotely using -h option :
+-----
+# mysql -h [server IP] -u [username] -p [password] -e '[mysql commands]'
+-----
+
+To secify a particular database using -d option :
+-----
+# mysql -d [datbase name] -u [username] -p [password] -e '[mysql commands]'
+-----
+
+To save output in text file :
+-----
+# mysql -u [username] -p [password] -e '[mysql commands]' > output.txt
+-----
+
+
+
+Now, we will learn to run MySQL query from BASH script :
+you can use EOF to create shell script
+-----
+#!/bin/bash
+mysql -u [username] -p [password] << EOF
+[mysql commands]
+[mysql commands]
+[mysql commands]
+EOF
+-----
+save this file and you can execute this file.
+
+************************************
+
+Asdf@1234 = 573ec25450f4badb4686a773aa4001eb
+
+***********************************
+
+SET GLOBAL validate_password_policy=LOW
+
+
+*************************************
+
+to login to the mysql on particular host from any ip run the below command
+
+GRANT ALL ON databasename.tablename to 'database_username'@'10.24.96.5' IDENTIFIED BY 'database_password';
+
+databasename,tablename= can be *(so that applicable to all)
+
+grant all privileges on `database_name`.`table_name` to 'user_name'@'hostname';
+
+*****************************************
+
+CREATE USER 'parsa'@'localhost' IDENTIFIED BY 'your_password';
+grant all privileges on *.* to 'parsa'@'localhost';
+Syntax:
+
+mysql> grant all privileges on `database_name`.`table_name` to 'user_name'@'hostname';
+
+******************************************
+
+CREATE USER 'sammy'@'localhost' IDENTIFIED BY 'password';
+
+GRANT ALL PRIVILEGES ON *.* TO 'sammy'@'localhost' WITH GRANT OPTION;
+
+FLUSH PRIVILEGES;
+
+****************************************
+
+truncate table [table_name]
+
+to clear rows and keep structure
+
+**************************************
+
+GET COUNT OF ROWS FROM A TABLE
+
+select count(*) from tablename;
+
+***********************************
+
+DELETE S1 FROM international_number_pattern_info AS S1 INNER JOIN international_number_pattern_info AS S2 WHERE S1.id > S2.id AND S1.country = S2.country AND S1.country_code = S2.country_code AND S1.length = S2.length;
+
+***********************************
+DB/DB table dump taking
+
+mysqldump -upsms -pcheckdump -h 10.0.69.107 httpapi_aggr usermst > usermst.sql
+
+***********************************
+
+insert row from table 1 to table 2
+
+INSERT INTO table SELECT * FROM table WHERE primakey=1;
+
+***********************************
+Maximum value from a column in table
+
+SELECT MAX(columnname) AS "Maximum Income" FROM tablename;
+
+*********************************** 
+
+ERROR 1064 (42000)
+
+if we use hyphen(-) in name of database/column for removing you need to mention the same in the in `database_name/column_name`(back quotes present on left of number 1 in keyboard or below esc button in keyboard)
+
+*********************************** 
+
+Query to make end date of user same as contractmst enddate.
+
+update usermst u JOIN contractmst c set u.enddate=c.enddate where u.contractid=c.contractid;
+
+***********************************
+
+ERROR 1067 (42000): Invalid default value for 'creationdate'
+
+SET sql_mode = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+
+***********************************
+
+INSERT DATA FROM ONE db to other
+
+INSERT INTO db1.table SELECT * FROM db2.table;
+
+***********************************
+
+Count of columns in a table
+
+SELECT count(*) AS anyName FROM information_schema.columns WHERE table_name = 'yourTableName';
+
+***********************************
+
+Encrypt password in usermst of psms
+
+select sha2('solomon123',256);
+
+***********************************
+
+Take mysqlql all db's dump commandline 
+
+mysqldump -u root -p[mysql_password] --all-databases > /var/www_my_backups/all-databases.sql
+
+***********************************
+
+find size of a directory/file
+
+du -sh directory/file
+
+**********************************
+
+mysqladmin -u root -p"Abcd@1234" -i1  processlist | grep -v Sleep
+
+***********************************
+
+KSA
+
+mongo --host  mongodbhost --port 27017 -u "mongoadmin" -p "Password@1234" --authenticationDatabase "admin";
+
+INDIA
+
+UAT - mongo --host 10.0.74.238 --port 27017 -u "mongoadmin" -p "Password@1234" --authenticationDatabase "admin";
+
+PRODUCTION - mongo --host 10.30.70.211 --port 27017 -u "mongoadmin" -p "Password@1234" --authenticationDatabase "admin";
+
+db.voice_obd_execution_process_status.find().pretty()
+
+db.email_execution_process_status.find().pretty();
+
+db.sms_execution_process_status.find().pretty();
+
+db.waba_execution_process_status.find().pretty();
+
+mongo --eval 'db.mycollection.update({"name":"foo"},{$set:{"this":"that"}});' myDbName
+
+
+************************************
+
+LATEST
+
+select * from tablename order by columnname desc limit1 \G
+
+*********************************
+
+Find size of a table in mysql
+
+SELECT TABLE_NAME AS `table`,ROUND((DATA_LENGTH + INDEX_LENGTH) / 1024 / 1024) AS `Size (MB)`FROM information_schema.TABLES WHERE TABLE_SCHEMA = "bookstore" AND TABLE_NAME = "book" ORDER BY (DATA_LENGTH + INDEX_LENGTH) DESC;
+
+***********************************
+
+Create a copy table with same schema no data
+
+create table tablename like reference_table;
+
+********************************
+
+Change default value of a column in MYSQL
+
+alter table tablename modify columnname varchar(20) DEFAULT 'Chris';
+
+********************************
+

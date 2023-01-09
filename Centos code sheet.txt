@@ -1,0 +1,368 @@
+Centos code sheet URL
+
+https://www.codegrepper.com/code-examples/shell/centos+7+create+user+with+root+privileges
+
+DELETE A RECURSIVE DIRECTORY FROM MULTIPLE FOLDERS
+
+example-1: find /path to search -name "directory name" -type d -exec /bin/rm -rf {} +
+
+example-2: find /start/search/from/this/dir -name "dirname-to-delete" -type d -exec /bin/rm -rf {} +
+
+ADD CONTENT TO A FILE WITH COMMANDLINE
+
+echo "content to add" >> /home/nikhil.earni/api.properties
+
+CREATE A TARFILE/TARDIRECTORY
+
+cd to the dir/file place
+tar -zcvf file/dirname.tar.gz file/dirname
+
+(or)
+
+give path in commandline at last as below
+tar -zcvf file/dirname.tar.gz /path of file(or)dir
+
+**********************************************
+
+Creating a zip file/directory
+
+zip file.zip file
+
+zip -r directory.zip directory
+
+**********************************************
+
+FOR EXTRACTING
+
+tar -xzf file/dir.tar.gz
+
+unzip file/dirname.zip -d /target directory
+
+or else unzip at same place
+
+unzip file/dirname.zip
+
+UNZIP A .GZ FILE
+
+gunzip file/dir.gz
+
+CREATE A WAR FILE
+
+1.	Get into the directory containing files.
+2.	jar -cvf filename.war files to be in that warfile(or) .  (to add all the files in the current directory)
+
+UNZIP A WAR FILE
+1.	Copy the war file to destination directory  and run below command.
+2.	jar -xvf filename.war  
+3.	file will be extracted and saved in current directory
+To specific directory
+1.	get into war file holding directory and run below command.
+2.	unzip filename.war -d /destination directory/
+
+Get SSl Certificate of a address
+URL: https://serverfault.com/questions/661978/displaying-a-remote-ssl-certificate-details-using-cli-tools?rq=1
+1.	echo -n | openssl s_client -connect $HOST:$PORTNUMBER -servername $SERVERNAME \    | openssl x509 > /tmp/$SERVERNAME.cert
+Example: echo -n | openssl s_client -connect 10.0.70.38:9543 -servername 10.0.70.38 \    | openssl x509 > /home/nikhil.earni/file.cert (Directory to create that certificate file can be any extension ur wish)
+2.	echo | \    openssl s_client -servername www.example.com -connect www.example.com:443 2>/dev/null | \    openssl x509 -text
+Example: echo | \    openssl s_client -servername 10.0.70.38 -connect 10.0.70.38:9543 2>/dev/null | \    openssl x509 -text
+
+
+To view Website information
+1.	curl -vvl URL
+
+EX: curl -vvI https://vfloginsight.myvaluefirst.com/login?loginUrl=%2Findex
+
+2.	curl –verbose URL
+
+EX: curl --verbose https://vfloginsight.myvaluefirst.com/login?loginUrl=%2Findex
+
+ Difference between 2 files
+     CMD: diff file1/ file2/
+ Difference between 2 directories
+     CMD: diff -q dir1/ dir2/   ----------------check the difference between directories.
+     CMD: diff -qr dir1/ dir2/  ------------check the difference between subdirectories also.
+
+See the files in the war/jar file without extracting
+     CMD: vim file.war
+Delete a file from war/jar file
+      CMD: zip -d file.war filetodelete/
+	  
+*************************************
+
+Restart wildfly server
+
+
+sh -x  /opt/wildfly/bin/standalone.sh -b 0.0.0.0 > /dev/null &
+
+****************************************
+
+encrypt with md5sum
+
+echo -n 'password' | md5sum   ------------    Linux command
+select md5('password')        ------------    MYSQL command
+
+**************************************
+
+REPLACE A WORD(STRING) WITH ANOTHER WORD(STRING)
+
+NOTE: you can use any symbol in place of '/' like '+,&,$, etc.,'
+
+CMD=   sed -i 's/search_string/replace_string/' filename
+
+CMD=   sed -i 's+search_string+replace_string+' filename
+
+
+
+*****************************************
+
+READ THE SECOND WORD OF THE FIRST LINE ONLY
+
+awk ' {print $2; exit} ' input.log
+
+****************************************
+
+CENTOS VERSION
+
+1.    hostnamectl
+
+Static hostname: vl068202-app12-pd-api15-sms-nm-mum-vsan-in-vf.vfirst.local
+         Icon name: computer-vm
+           Chassis: vm
+        Machine ID: 301e98982ddb4aa99dc45bc92cc698d3
+           Boot ID: 2031acb0035a490ab798b6feb1755f06
+    Virtualization: vmware
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-1160.66.1.el7.x86_64
+      Architecture: x86-64
+
+2.         cat /etc/centos-release
+
+CentOS Linux release 7.9.2009 (Core)
+
+***************************************
+Copy a update/latest of a particular file from a directory
+
+cp -r -p "`ls -dtr1 /home/nikhil.earni/backup/api15.properties.* | tail -1`" "/home/nikhil.earni/tmp/"
+
+**************************************** 
+Get all the Java configurations available in your machine
+
+alternatives --config java
+
+yum install java-11-openjdk-devel
+
+****************************************
+
+PHP version update
+
+URL: https://ostechnix.com/how-to-switch-between-multiple-php-versions-in-ubuntu/
+
+update-alternatives --config php
+
+yum install 
+
+
+
+****************************************
+COPY CERTAIN NUMBER OF LINES FROM FILE1 TO FILE2
+
+----->Open a terminal with a shell then
+
+sed -n '10,15p' file1.txt > file2.txt
+Simple & easy.
+
+----->If you want to append to the end instead of wiping file2.txt, use >> for redirection.
+
+sed -n '10,15p' file1.txt >> file2.txt
+                          ^^
+------>AWK is also a powerful command line text manipulator:
+
+awk 'NR>=10 && NR<=15' file1.txt > file2.txt
+
+----->If you want to append to the end instead of wiping file2.txt, use >> for redirection.
+
+awk 'NR>=10 && NR<=15' file1.txt > file2.txt
+
+********************************************
+
+Copy bash script result to another file
+
+bash script.sh >> file.txt
+
+*********************************************
+
+vi /etc/httpd/conf/httpd.conf
+
+service httpd restart
+
+/var/www/html/ValueCallzN
+
+*********************************************
+
+/proc/$PID/cmdline
+
+*********************************************
+
+ps -p $PID -o comm=
+
+*********************************************
+
+ls -l /proc/$PID/exe
+
+*********************************************
+
+- name: Run a Powershell script on a windows host
+  script: subdirectories/under/path/with/your/playbook/script.ps1
+
+*********************************************
+  
+  sed -i '3 i New Line with sed' File1
+
+*********************************************
+  
+  wildfly version---/usr/local/jboss_MT1/bin/standalone.sh --version
+  wildfly version---/opt/wildfly-24.0.1.Final/modules/system/layers/base/org/jboss/as/version/main
+
+*********************************************
+
+ignore_errors: yes
+
+*********************************************
+
+echo "number" | alternatives --config java
+
+*********************************************
+Delete particular lines from a file in linux
+
+https://www.folkstalk.com/2013/03/sed-remove-lines-file-unix-examples.html
+
+sed 'm,nd' file.txt > file_1.txt
+
+*********************************************
+Find the list of owners in a particular directory
+
+find /var -printf '%u:%g\n' | sort -t: -u
+
+*********************************************
+
+CENTOS KERNEL UPDATE
+
+*********************************************
+
+Find the version of the kernel
+
+uname -msr
+Linux 3.10.0-1160.66.1.el7.x86_64 x86_64
+
+uname -r
+3.10.0-1160.66.1.el7.x86_64
+
+*********************************************
+refresh cache after changing database data
+ curl -i 'http://10.0.68.202:28080/smpp/refreshipmst'
+
+*********************************************
+
+MONITOR THE API15 SERVICE
+
+grep '26/Sep/2022:16' /usr/local/jboss_MT1/standalone/log/access_log.log  | awk -F ' ' '{print$(NF )}' | sort | uniq -c
+
+*********************************************
+
+PRINT MTH WORD IN NTH LINE
+
+cat errors.txt|head -n|tail -m | awk '{ print $1 }'
+
+cat errors.txt|head -1 | awk '{ print $1 }'
+
+*********************************************
+
+Get the public IP of a server
+
+curl ifconfig.me
+
+*********************************************
+
+Infinito restart
+
+INDIA
+#kill -9 3188317; sh -x /home/vfapps/scripts/Check_Jboss.sh
+
+KSA
+#kill -9 1532271; sh -x /home/vfapps/scripts/Check_Jboss.sh
+
+create user  logsearch@'10.50.139.%' identified by 'LogSearch@123';
+
+**************************************************
+
+transfer files from one to another server 
+
+scp -P33707  dlrsender_builds  vfapps@10.0.74.147:/home/vfapps/
+
+*************************************************
+
+Ansible tags in commandline
+
+ansible-playbook example.yml --tags "configuration,packages"
+
+*************************************************
+
+To check version of MIS_script
+
+sh /usr/local/MIS_SCRIPT_MT1/mis_script/version.sh
+
+***************************************************
+
+apache restart in valuecallz server
+
+/usr/local/apache2/bin/httpd -k restart
+
+***************************************************
+
+Exclude certain folder while copying
+
+rsync -av --progress sourcefolder /destinationfolder --exclude thefoldertoexclude --exclude anotherfoldertoexclude
+
+Ex: rsync -av --progress ./nik ./nikhil_backup --exclude nik/2.txt
+
+******************************************************
+
+ANsible commandline on the 10.0.70.101 server
+
+ansible-playbook config.yml -e "ansible_user=vfapps ansible_password=ibm#100 ansible_port=919"
+
+****************************************************
+
+update ftp_config set RUN_STATUS='8',reportTime='14:58-daily' where userid = 'nissanxmltrn'\G
+
+**********************
+
+SCP between Servers
+
+scp -P919 filename username@IP:destination
+
+*********************
+
+delegate_to: 127.0.0.1
+
+
+awk '{sub(/blue/,"azure")}1' input.txt > temp.txt && mv temp.txt input.txt
+
+*********************
+
+to download using MIS-APP
+
+scp -P919   vfapps@10.0.70.213:/usr/local/MIS-APP/standalone/deployments/vmpreport.war/download/
+
+download link: https://mis.myvaluefirst.com/vmpreport/download/NAME_OF_FILE
+
+*************************
+
+DATE in shell script
+
+date=$(date '+%Y-%m-%d %H:%M:%S')
+
+*****************
+
+
